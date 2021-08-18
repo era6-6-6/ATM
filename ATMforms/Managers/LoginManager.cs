@@ -13,15 +13,21 @@ namespace ATMforms.Managers
         private readonly string PATH = $@"{Environment.CurrentDirectory}/users.txt";
         public bool Register(string username, string password)
         {
+            string text;
             if(!File.Exists(PATH))
             {
                 var file = File.Create(PATH);
                 file.Close();
             }
             if(CheckIfUserExist(username)) return false;
-            using(StreamWriter writer =  new StreamWriter(PATH))
+            using (StreamReader read = File.OpenText(PATH))
+            {
+                text = read.ReadToEnd();
+            }
+            using (StreamWriter writer = new StreamWriter(PATH))
             {
                 writer.WriteLine($"!{username} , {password}! , Balance: 500!");
+                writer.WriteLine(text);
             }
             return true;
         }
@@ -55,7 +61,7 @@ namespace ATMforms.Managers
             {
                 text = read.ReadToEnd();
             }
-            Match match = Regex.Match(text, $"!{username} , (.*)!");
+            Match match = Regex.Match(text, $"!{username} , (.*)! , Balance: (.*)!");
             if(!match.Success)
             {
                 return "user don't exist register please";
