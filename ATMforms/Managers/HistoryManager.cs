@@ -22,22 +22,31 @@ namespace ATMforms.Managers
                file.Close();
             }
             Data = new List<string>();
+            Data.Clear();
             string text;
             using (StreamReader reader = File.OpenText(PATH))
             {
                  text = reader.ReadToEnd();
 }
-            Match Balance = Regex.Match(text, $"!(.*) , {id} , (,*) , (.*)!");
-            
-            for (int i = 0; i < Balance.Groups.Count; i++)
+            Match Balance = Regex.Match(text, $"!(.*) , {id} , (.*) , (.*)!");
+            if (Balance.Success)
             {
-                Data.Add($"{Balance.Groups[1]} - {Balance.Groups[2]} - {Balance.Groups[3]}");
-                Balance = Balance.NextMatch();
-                
+                for (int i = 0; i < Balance.Length; i++)
+                {
+                    
+                    
+                    Data.Add($"{Balance.Groups[1]} - {Balance.Groups[2]} - {Balance.Groups[3]}");
+                    Balance = Balance.NextMatch();
+
+                }
+                foreach (var item in Data)
+                {
+                    Console.WriteLine(item);
+                }
             }
-            foreach (var item in Data)
+            else
             {
-                Console.WriteLine(item);
+                throw new Exception("nothing found");
             }
         }
         public void SaveTransaction(DateTime date, int IDFrom , int IDTo, double amount)

@@ -32,7 +32,7 @@ namespace ATMforms.BankForm
             this.MainTAb = new MetroFramework.Controls.MetroTabControl();
             this.OverViewTab = new MetroFramework.Controls.MetroTabPage();
             this.HistoryTab = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.TransactionTab = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage6 = new MetroFramework.Controls.MetroTabPage();
@@ -44,8 +44,12 @@ namespace ATMforms.BankForm
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.BalanceBtn = new MetroFramework.Controls.MetroButton();
             this.metroButton4 = new MetroFramework.Controls.MetroButton();
+            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
+            this.SendBtn = new MetroFramework.Controls.MetroButton();
             this.MainTAb.SuspendLayout();
             this.OverViewTab.SuspendLayout();
+            this.TransactionTab.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,15 +57,15 @@ namespace ATMforms.BankForm
             // MainTAb
             // 
             this.MainTAb.Controls.Add(this.OverViewTab);
-            this.MainTAb.Controls.Add(this.metroTabPage6);
             this.MainTAb.Controls.Add(this.HistoryTab);
-            this.MainTAb.Controls.Add(this.metroTabPage3);
+            this.MainTAb.Controls.Add(this.TransactionTab);
+            this.MainTAb.Controls.Add(this.metroTabPage6);
             this.MainTAb.Controls.Add(this.metroTabPage4);
             this.MainTAb.Controls.Add(this.metroTabPage5);
             this.MainTAb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTAb.Location = new System.Drawing.Point(20, 60);
             this.MainTAb.Name = "MainTAb";
-            this.MainTAb.SelectedIndex = 1;
+            this.MainTAb.SelectedIndex = 2;
             this.MainTAb.Size = new System.Drawing.Size(1301, 718);
             this.MainTAb.TabIndex = 0;
             this.MainTAb.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -89,16 +93,19 @@ namespace ATMforms.BankForm
             this.HistoryTab.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.HistoryTab.VerticalScrollbarBarColor = true;
             // 
-            // metroTabPage3
+            // TransactionTab
             // 
-            this.metroTabPage3.HorizontalScrollbarBarColor = true;
-            this.metroTabPage3.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(1293, 679);
-            this.metroTabPage3.TabIndex = 2;
-            this.metroTabPage3.Text = "metroTabPage3";
-            this.metroTabPage3.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.TransactionTab.Controls.Add(this.SendBtn);
+            this.TransactionTab.Controls.Add(this.metroPanel4);
+            this.TransactionTab.Controls.Add(this.metroPanel3);
+            this.TransactionTab.HorizontalScrollbarBarColor = true;
+            this.TransactionTab.Location = new System.Drawing.Point(4, 35);
+            this.TransactionTab.Name = "TransactionTab";
+            this.TransactionTab.Size = new System.Drawing.Size(1293, 679);
+            this.TransactionTab.TabIndex = 2;
+            this.TransactionTab.Text = "Transactions";
+            this.TransactionTab.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.TransactionTab.VerticalScrollbarBarColor = true;
             // 
             // metroTabPage4
             // 
@@ -224,6 +231,43 @@ namespace ATMforms.BankForm
             this.metroButton4.TabIndex = 4;
             this.metroButton4.Text = "metroButton4";
             // 
+            // metroPanel3
+            // 
+            this.metroPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.metroPanel3.HorizontalScrollbarBarColor = true;
+            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.HorizontalScrollbarSize = 10;
+            this.metroPanel3.Location = new System.Drawing.Point(0, 0);
+            this.metroPanel3.Name = "metroPanel3";
+            this.metroPanel3.Size = new System.Drawing.Size(1293, 62);
+            this.metroPanel3.TabIndex = 2;
+            this.metroPanel3.VerticalScrollbarBarColor = true;
+            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.VerticalScrollbarSize = 10;
+            // 
+            // metroPanel4
+            // 
+            this.metroPanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.metroPanel4.HorizontalScrollbarBarColor = true;
+            this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.HorizontalScrollbarSize = 10;
+            this.metroPanel4.Location = new System.Drawing.Point(0, 62);
+            this.metroPanel4.Name = "metroPanel4";
+            this.metroPanel4.Size = new System.Drawing.Size(1293, 62);
+            this.metroPanel4.TabIndex = 3;
+            this.metroPanel4.VerticalScrollbarBarColor = true;
+            this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel4.VerticalScrollbarSize = 10;
+            // 
+            // SendBtn
+            // 
+            this.SendBtn.Location = new System.Drawing.Point(1215, 130);
+            this.SendBtn.Name = "SendBtn";
+            this.SendBtn.Size = new System.Drawing.Size(75, 23);
+            this.SendBtn.TabIndex = 4;
+            this.SendBtn.Text = "Send";
+            this.SendBtn.Click += new System.EventHandler(this.SendBtn_Click);
+            // 
             // BankFormUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +282,7 @@ namespace ATMforms.BankForm
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BankFormUser_FormClosed);
             this.MainTAb.ResumeLayout(false);
             this.OverViewTab.ResumeLayout(false);
+            this.TransactionTab.ResumeLayout(false);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -250,7 +295,7 @@ namespace ATMforms.BankForm
         private MetroFramework.Controls.MetroTabControl MainTAb;
         private MetroFramework.Controls.MetroTabPage OverViewTab;
         private MetroFramework.Controls.MetroTabPage HistoryTab;
-        private MetroFramework.Controls.MetroTabPage metroTabPage3;
+        private MetroFramework.Controls.MetroTabPage TransactionTab;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
         private MetroFramework.Controls.MetroTabPage metroTabPage5;
         private MetroFramework.Controls.MetroTabPage metroTabPage6;
@@ -262,5 +307,8 @@ namespace ATMforms.BankForm
         private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroPanel metroPanel4;
+        private MetroFramework.Controls.MetroPanel metroPanel3;
+        private MetroFramework.Controls.MetroButton SendBtn;
     }
 }

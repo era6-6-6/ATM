@@ -14,7 +14,7 @@ namespace ATMforms.BankForm
 {
     public partial class BankFormUser : MetroForm
     {
-       
+       HistoryManager _historyManager;
       
         public BankFormUser()
         {
@@ -29,6 +29,14 @@ namespace ATMforms.BankForm
         private void BankFormUser_FormClosed(object sender, FormClosedEventArgs e)
         {
             Form1.list.Remove(this.Name);
+        }
+
+        private void SendBtn_Click(object sender, EventArgs e)
+        {
+            
+            _historyManager = new HistoryManager();
+            _historyManager.SaveTransaction(DateTime.Now , int.Parse(IdLbl.Text.Replace("ID: " , "")) , 11 , 5000);
+            _historyManager.GetTransaction(int.Parse(IdLbl.Text.Replace("ID: " , "")));
         }
     }
 }
