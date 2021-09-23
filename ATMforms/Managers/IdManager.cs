@@ -11,7 +11,6 @@ namespace ATMforms.Managers
         public int ID()
         {
             Random a = new Random();
-
             return a.Next();
 
         }

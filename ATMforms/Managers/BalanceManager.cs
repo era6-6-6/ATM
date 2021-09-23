@@ -10,7 +10,10 @@ namespace ATMforms.Managers
 {
     class BalanceManager
     {
-        private readonly string PATH = $"{Environment.CurrentDirectory}/users.txt";
+        public static int ID {get; set;}
+        public static double Balance { get; set; }
+
+        private readonly string PATH = $"{Environment.CurrentDirectory}/SmallDB/users.txt";
 
         public double BalanceUSer(string username, string password)
         {
@@ -20,6 +23,9 @@ namespace ATMforms.Managers
                 text = read.ReadToEnd();
             }
             Match match = Regex.Match(text, $"!(.*) , {username} , {password}! , Balance: (.*)!");
+            ID = int.Parse(match.Groups[1].ToString());
+            Balance = double.Parse(match.Groups[2].ToString());
+
             return double.Parse(match.Groups[2].ToString());
         }
     }

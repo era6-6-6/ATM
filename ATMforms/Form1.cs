@@ -19,6 +19,7 @@ namespace ATMforms
         private LoginManager loginManager;
         private MetroForm form;
         public static ArrayList list;
+        BalanceManager _Bal;
 
     
         public Form1()
@@ -112,7 +113,8 @@ namespace ATMforms
             msgLabelLgn.Text = loginManager.login(UsernameBox.Text, PasswordBox.Text);
             if(LoginSucces())
             {
-                
+                _Bal = new BalanceManager();
+                _Bal.BalanceUSer(UsernameBox.Text , PasswordBox.Text);
                 form = new BankForm.BankFormUser();
                 form.Name = $"{UsernameBox.Text}";
                 form.Text = $"Logged as {UsernameBox.Text}";
@@ -131,7 +133,7 @@ namespace ATMforms
             }
             else
             {
-                MessageBox.Show("Not success");
+                MessageBox.Show(msgLabelLgn.Text);
             }
         }
         private bool LoginSucces()

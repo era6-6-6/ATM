@@ -11,7 +11,7 @@ namespace ATMforms.Managers
     class LoginManager
     {
         IdManager _idManager;
-        private readonly string PATH = $@"{Environment.CurrentDirectory}/users.txt";
+        private readonly string PATH = $@"{Environment.CurrentDirectory}/SmallDB/users.txt";
         public bool Register(string username, string password)
         {
             _idManager = new IdManager();
