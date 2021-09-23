@@ -10,9 +10,11 @@ namespace ATMforms.Managers
 {
     class LoginManager
     {
+        IdManager _idManager;
         private readonly string PATH = $@"{Environment.CurrentDirectory}/users.txt";
         public bool Register(string username, string password)
         {
+            _idManager = new IdManager();
             string text;
             if(!File.Exists(PATH))
             {
@@ -26,7 +28,7 @@ namespace ATMforms.Managers
             }
             using (StreamWriter writer = new StreamWriter(PATH))
             {
-                writer.WriteLine($"!{username} , {password}! , Balance: 500!");
+                writer.WriteLine($"! {_idManager.ID()} , {username} , {password}! , Balance: 500!");
                 writer.WriteLine(text);
             }
             return true;
@@ -45,7 +47,7 @@ namespace ATMforms.Managers
                text = read.ReadToEnd();
                 
             }
-            Match match = Regex.Match(text, $"!{username} , (.*)!");
+            Match match = Regex.Match(text, $"!(.*) , {username} , (.*)!");
             return match.Success;
                 
         }
@@ -61,12 +63,12 @@ namespace ATMforms.Managers
             {
                 text = read.ReadToEnd();
             }
-            Match match = Regex.Match(text, $"!{username} , (.*)! , Balance: (.*)!");
+            Match match = Regex.Match(text, $"!(.*) , {username} , (.*)! , Balance: (.*)!");
             if(!match.Success)
             {
                 return "user don't exist register please";
             }
-            if(match.Groups[1].ToString() != password)
+            if(match.Groups[2].ToString() != password)
             {
                 return "Wrong password";
             }

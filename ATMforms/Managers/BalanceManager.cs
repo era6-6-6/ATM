@@ -19,8 +19,8 @@ namespace ATMforms.Managers
             {
                 text = read.ReadToEnd();
             }
-            Match match = Regex.Match(text, $"!{username} , {password}! , Balance: (.*)!");
-            return double.Parse(match.Groups[1].ToString());
+            Match match = Regex.Match(text, $"!(.*) , {username} , {password}! , Balance: (.*)!");
+            return double.Parse(match.Groups[2].ToString());
         }
     }
 }
