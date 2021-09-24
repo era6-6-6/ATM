@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
-
+using System.Windows.Forms;
 
 namespace ATMforms.Managers
 {
@@ -14,17 +13,17 @@ namespace ATMforms.Managers
     {
         private readonly string PATH = $@"{Environment.CurrentDirectory}/SmallDB/Transactions.txt";
         private readonly string PATHUsers = $@"{Environment.CurrentDirectory}/SmallDB/users.txt";
-        public static List<string> Data;
+      
+        public static List<ListViewItem> ListV;
     
-        public void GetTransaction(int id)
+        public void GetTransactions(int id)
         { 
             if(!File.Exists(PATH))
             {
                var file = File.Create(PATH);
                file.Close();
             }
-            Data = new List<string>();
-            Data.Clear();
+        
             string text;
             using (StreamReader reader = File.OpenText(PATH))
             {
@@ -33,23 +32,25 @@ namespace ATMforms.Managers
             Match Balance = Regex.Match(text, $"!(.*) , {id} , (.*) , (.*)!");
             if (Balance.Success)
             {
+                ListV = new List<ListViewItem>();
+                ListV.Clear();
                 for (int i = 0; i < Balance.Length; i++)
                 {
-                    
-                    
-                    Data.Add($"{Balance.Groups[1]} - {Balance.Groups[2]} - {Balance.Groups[3]}");
+                    var viewList = new ListViewItem(Balance.Groups[1].ToString());
+                    viewList.SubItems.Add(id.ToString());
+                    viewList.SubItems.Add(Balance.Groups[2].ToString());
+                    viewList.SubItems.Add(Balance.Groups[3].ToString());
+                    ListV.Add(viewList);
                     Balance = Balance.NextMatch();
-
                 }
-                foreach (var item in Data)
-                {
-                    Console.WriteLine(item);
-                }
+                
+              
             }
             else
             {
-                throw new Exception("nothing found");
+                
             }
+            ListV.Reverse();
         }
         public void SaveTransaction(DateTime date, int IDFrom , int IDTo, double amount)
         {

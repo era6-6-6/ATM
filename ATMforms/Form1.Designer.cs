@@ -99,6 +99,7 @@ namespace ATMforms
             this.PasswordBox.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.PasswordBox.Location = new System.Drawing.Point(103, 64);
             this.PasswordBox.Name = "PasswordBox";
+            this.PasswordBox.PasswordChar = '*';
             this.PasswordBox.Size = new System.Drawing.Size(162, 23);
             this.PasswordBox.TabIndex = 3;
             this.PasswordBox.Text = "Password";

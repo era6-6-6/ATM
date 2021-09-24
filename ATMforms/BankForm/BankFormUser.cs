@@ -16,7 +16,9 @@ namespace ATMforms.BankForm
     {
        HistoryManager _historyManager;
         BalanceManager _balanceMAnager;
-      
+        
+
+
         public BankFormUser()
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace ATMforms.BankForm
             IdLbl.Text += " " + BalanceManager.ID;
             BalanceBtn.Text = " " + BalanceManager.Balance.ToString("N0",
     System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
+            BuildListView();
         }
 
         private void BankFormUser_FormClosed(object sender, FormClosedEventArgs e)
@@ -58,20 +61,60 @@ namespace ATMforms.BankForm
             else
             {
                 _historyManager.SaveTransaction(DateTime.Now, int.Parse(IdLbl.Text.Replace("ID: ", "")), 11, 5000);
-                _historyManager.GetTransaction(int.Parse(IdLbl.Text.Replace("ID: ", "")));
-                listView1.View = View.List;
-                listView1.GridLines = false;
-                listView1.Items.Clear();
-                foreach (var item in HistoryManager.Data)
-                {
-                    listView1.Items.Add(item);
-                }
+
+                addToHistory();
+              
                 _historyManager.MinusBalance(int.Parse(IdLbl.Text.Replace("ID: ", "")), 5000);
                 _balanceMAnager.BalanceUSerID(int.Parse(IdLbl.Text.Replace("ID: ", "")));
                 BalanceBtn.Text = " " + BalanceManager.Balance.ToString("N0",
                     System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
                 BalanceLbl.Text = "Balance: " + " " + BalanceManager.Balance.ToString("N0",
                     System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
+            }
+        }
+
+        private void MainTAb_Click(object sender, EventArgs e)
+        {
+            ResetBal();
+        }
+        private void ResetBal()
+        {
+            _balanceMAnager = new BalanceManager();
+            _balanceMAnager.BalanceUSerID(int.Parse(IdLbl.Text.Replace("ID: ", "")));
+            BalanceBtn.Text = " " + BalanceManager.Balance.ToString("N0",
+                  System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
+            BalanceLbl.Text = "Balance: " + " " + BalanceManager.Balance.ToString("N0",
+                System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
+        }
+        private void BuildListView()
+        {
+            listView1.View = View.Details;
+            listView1.Columns.Add("Date", 230, HorizontalAlignment.Left);
+            listView1.Columns.Add("From", 130, HorizontalAlignment.Left);
+            listView1.Columns.Add("To", 130 , HorizontalAlignment.Left);
+            listView1.Columns.Add("Amount", 130, HorizontalAlignment.Left);
+            listView1.Columns.Add("Message", 680, HorizontalAlignment.Left);
+            addToHistory();
+        }
+
+        private void HistoryTab_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void addToHistory()
+        {
+            
+
+            _historyManager = new HistoryManager();
+            _historyManager.GetTransactions(int.Parse(IdLbl.Text.Replace("ID: ", "")));
+            listView1.Items.Clear();
+            if (HistoryManager.ListV != null)
+            {
+                
+                foreach (var item in HistoryManager.ListV)
+                {
+                    listView1.Items.Add(item);
+                }
             }
         }
     }
