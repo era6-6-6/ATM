@@ -28,5 +28,18 @@ namespace ATMforms.Managers
 
             return double.Parse(match.Groups[2].ToString());
         }
+        public double BalanceUSerID(int id)
+        {
+            string text;
+            using (StreamReader read = File.OpenText(PATH))
+            {
+                text = read.ReadToEnd();
+            }
+            Match match = Regex.Match(text, $"! {id} , (.*) , (.*)! , Balance: (.*)!");
+            
+            Balance = double.Parse(match.Groups[3].ToString());
+
+            return double.Parse(match.Groups[3].ToString());
+        }
     }
 }
