@@ -34,9 +34,23 @@ namespace ATMforms.BankForm
 
         private void SendBtn_Click(object sender, EventArgs e)
         {
+            OnAction();
+        }
+
+        private bool EnoughMoney(int id)
+        {
+            _balanceMAnager = new BalanceManager();
+
+            if (_balanceMAnager.BalanceUSerID(id) <= 0)
+                return false;
+            else
+                return true;
+        }
+        private void OnAction()
+        {
             _balanceMAnager = new BalanceManager();
             _historyManager = new HistoryManager();
-            if (!EnoughMoney(int.Parse(IdLbl.Text.Replace("ID: ", ""))))
+            if (!EnoughMoney(int.Parse(IdLbl.Text.Replace("ID: ", ""))) || BalanceManager.Balance < 5000)
             {
                 MessageBox.Show("Not enough money");
                 return;
@@ -59,19 +73,6 @@ namespace ATMforms.BankForm
                 BalanceLbl.Text = "Balance: " + " " + BalanceManager.Balance.ToString("N0",
                     System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
             }
-
-
-
-        }
-
-        private bool EnoughMoney(int id)
-        {
-            _balanceMAnager = new BalanceManager();
-
-            if (_balanceMAnager.BalanceUSerID(id) <= 0)
-                return false;
-            else
-                return true;
         }
     }
 }
