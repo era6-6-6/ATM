@@ -55,21 +55,12 @@ namespace ATMforms.BankForm
             _historyManager = new HistoryManager();
             if (!EnoughMoney(int.Parse(IdLbl.Text.Replace("ID: ", ""))) || BalanceManager.Balance < 5000)
             {
-                MessageBox.Show("Not enough money");
+                System.Windows.Forms.MessageBox.Show("Not enough money");
                 return;
             }
             else
             {
-                _historyManager.SaveTransaction(DateTime.Now, int.Parse(IdLbl.Text.Replace("ID: ", "")), 11, 5000);
-
-                addToHistory();
-              
-                _historyManager.MinusBalance(int.Parse(IdLbl.Text.Replace("ID: ", "")), 5000);
-                _balanceMAnager.BalanceUSerID(int.Parse(IdLbl.Text.Replace("ID: ", "")));
-                BalanceBtn.Text = " " + BalanceManager.Balance.ToString("N0",
-                    System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
-                BalanceLbl.Text = "Balance: " + " " + BalanceManager.Balance.ToString("N0",
-                    System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
+                sendMoney();
             }
         }
 
@@ -89,11 +80,11 @@ namespace ATMforms.BankForm
         private void BuildListView()
         {
             listView1.View = View.Details;
-            listView1.Columns.Add("Date", 230, HorizontalAlignment.Left);
+            listView1.Columns.Add("Date", 280, HorizontalAlignment.Left);
             listView1.Columns.Add("From", 130, HorizontalAlignment.Left);
-            listView1.Columns.Add("To", 130 , HorizontalAlignment.Left);
+            listView1.Columns.Add("To", 160 , HorizontalAlignment.Left);
             listView1.Columns.Add("Amount", 130, HorizontalAlignment.Left);
-            listView1.Columns.Add("Message", 680, HorizontalAlignment.Left);
+            listView1.Columns.Add("Message", 630, HorizontalAlignment.Left);
             addToHistory();
         }
 
@@ -103,19 +94,37 @@ namespace ATMforms.BankForm
         }
         private void addToHistory()
         {
-            
 
-            _historyManager = new HistoryManager();
-            _historyManager.GetTransactions(int.Parse(IdLbl.Text.Replace("ID: ", "")));
-            listView1.Items.Clear();
-            if (HistoryManager.ListV != null)
+            try
             {
-                
-                foreach (var item in HistoryManager.ListV)
+                _historyManager = new HistoryManager();
+                _historyManager.GetTransactions(int.Parse(IdLbl.Text.Replace("ID: ", "")));
+                listView1.Items.Clear();
+                if (HistoryManager.ListV != null)
                 {
-                    listView1.Items.Add(item);
+
+                    foreach (var item in HistoryManager.ListV)
+                    {
+                        listView1.Items.Add(item);
+                    }
                 }
+            }catch
+            {
+
             }
+        }
+        private void sendMoney()
+        {
+            _historyManager.SaveTransaction(DateTime.Now, int.Parse(IdLbl.Text.Replace("ID: ", "")), int.Parse(ReceiverID.Text), double.Parse(AmountBox.Text) , MessageBox.Text);
+
+            addToHistory();
+
+            _balanceMAnager.Send(int.Parse(IdLbl.Text.Replace("ID: ", "")), double.Parse(AmountBox.Text), int.Parse(ReceiverID.Text));
+            _balanceMAnager.BalanceUSerID(int.Parse(IdLbl.Text.Replace("ID: ", "")));
+            BalanceBtn.Text = " " + BalanceManager.Balance.ToString("N0",
+                System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
+            BalanceLbl.Text = "Balance: " + " " + BalanceManager.Balance.ToString("N0",
+                System.Globalization.CultureInfo.GetCultureInfo("de")) + "$";
         }
     }
 }

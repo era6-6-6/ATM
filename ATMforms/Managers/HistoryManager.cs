@@ -29,7 +29,7 @@ namespace ATMforms.Managers
             {
                  text = reader.ReadToEnd();
 }
-            Match Balance = Regex.Match(text, $"!(.*) , {id} , (.*) , (.*)!");
+            Match Balance = Regex.Match(text, $"!(.*) , {id} , (.*) , (.*) , (.*)!");
             if (Balance.Success)
             {
                 ListV = new List<ListViewItem>();
@@ -39,7 +39,8 @@ namespace ATMforms.Managers
                     var viewList = new ListViewItem(Balance.Groups[1].ToString());
                     viewList.SubItems.Add(id.ToString());
                     viewList.SubItems.Add(Balance.Groups[2].ToString());
-                    viewList.SubItems.Add(Balance.Groups[3].ToString());
+                    viewList.SubItems.Add(Balance.Groups[3].ToString() + "$");
+                    viewList.SubItems.Add(Balance.Groups[4].ToString());
                     ListV.Add(viewList);
                     Balance = Balance.NextMatch();
                 }
@@ -50,9 +51,12 @@ namespace ATMforms.Managers
             {
                 
             }
-            ListV.Reverse();
+            if (ListV != null)
+            {
+                ListV.Reverse();
+            }
         }
-        public void SaveTransaction(DateTime date, int IDFrom , int IDTo, double amount)
+        public void SaveTransaction(DateTime date, int IDFrom , int IDTo, double amount , string mess = null)
         {
             if(!File.Exists(PATH))
             {
@@ -62,7 +66,7 @@ namespace ATMforms.Managers
             
             using(StreamWriter writer = File.AppendText(PATH))
             {
-                writer.WriteLine($"!{date} , {IDFrom} ,  {IDTo} , {amount}!");
+                writer.WriteLine($"!{date} , {IDFrom} ,  {IDTo} , {amount} , {mess}!");
             }
         }
         public void MinusBalance(int id, double bal)

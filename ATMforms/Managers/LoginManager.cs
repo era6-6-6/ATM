@@ -35,6 +35,7 @@ namespace ATMforms.Managers
         }
         public bool CheckIfUserExist(string username)
         {
+            
             if(!File.Exists(PATH))
             {
                 var file = File.Create(PATH);
@@ -45,7 +46,7 @@ namespace ATMforms.Managers
             using (StreamReader read = File.OpenText(PATH))
             {
                text = read.ReadToEnd();
-                
+               
             }
             Match match = Regex.Match(text, $"!(.*) , {username} , (.*)!");
             return match.Success;
