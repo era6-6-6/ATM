@@ -29,20 +29,36 @@ namespace ATMforms.Managers
             {
                  text = reader.ReadToEnd();
 }
-            Match Balance = Regex.Match(text, $"!(.*) , {id} , (.*) , (.*) , (.*)!");
+            Match Balance = Regex.Match(text, $"!(.*) , {id} , (.*) , (.*), (.*) , (.*)!");
             if (Balance.Success)
             {
                 ListV = new List<ListViewItem>();
                 ListV.Clear();
                 for (int i = 0; i < Balance.Length; i++)
                 {
-                    var viewList = new ListViewItem(Balance.Groups[1].ToString());
-                    viewList.SubItems.Add(id.ToString());
-                    viewList.SubItems.Add(Balance.Groups[2].ToString());
-                    viewList.SubItems.Add(Balance.Groups[3].ToString() + "$");
-                    viewList.SubItems.Add(Balance.Groups[4].ToString());
-                    ListV.Add(viewList);
-                    Balance = Balance.NextMatch();
+                    if(Balance.Groups[4].ToString() == "+")
+                    {
+                        var viewList = new ListViewItem(Balance.Groups[1].ToString());
+                        viewList.SubItems.Add(Balance.Groups[2].ToString());
+                        viewList.SubItems.Add(id.ToString());
+                        viewList.SubItems.Add(Balance.Groups[4] + Balance.Groups[3].ToString() + "$");
+                        viewList.SubItems.Add(Balance.Groups[5].ToString());
+                        ListV.Add(viewList);
+                        Balance = Balance.NextMatch();
+
+                    }
+                    else
+                    {
+                        var viewList = new ListViewItem(Balance.Groups[1].ToString());
+                        viewList.SubItems.Add(id.ToString());
+                        viewList.SubItems.Add(Balance.Groups[2].ToString());
+                        viewList.SubItems.Add(Balance.Groups[4] + Balance.Groups[3].ToString() + "$");
+                        viewList.SubItems.Add(Balance.Groups[5].ToString());
+                        ListV.Add(viewList);
+                        Balance = Balance.NextMatch();
+
+                    }
+                 
                 }
                 
               
@@ -66,7 +82,8 @@ namespace ATMforms.Managers
             
             using(StreamWriter writer = File.AppendText(PATH))
             {
-                writer.WriteLine($"!{date} , {IDFrom} ,  {IDTo} , {amount} , {mess}!");
+                writer.WriteLine($"!{date} , {IDFrom} ,  {IDTo} , {amount}, - , {mess}!");
+                writer.WriteLine($"!{date} , {IDTo} , {IDFrom} , {amount} , + , {mess}!");
             }
         }
         public void MinusBalance(int id, double bal)

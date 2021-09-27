@@ -67,6 +67,7 @@ namespace ATMforms.BankForm
         private void MainTAb_Click(object sender, EventArgs e)
         {
             ResetBal();
+            addToHistory();
         }
         private void ResetBal()
         {

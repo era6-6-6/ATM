@@ -32,12 +32,9 @@ namespace ATMforms.BankForm
             this.MainTAb = new MetroFramework.Controls.MetroTabControl();
             this.OverViewTab = new MetroFramework.Controls.MetroTabPage();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroButton4 = new MetroFramework.Controls.MetroButton();
             this.BalanceBtn = new MetroFramework.Controls.MetroButton();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
-            this.metroTabPage5 = new MetroFramework.Controls.MetroTabPage();
             this.TransactionTab = new MetroFramework.Controls.MetroTabPage();
             this.InstantPayCheck = new MetroFramework.Controls.MetroCheckBox();
             this.MessageBox = new MetroFramework.Controls.MetroTextBox();
@@ -50,8 +47,6 @@ namespace ATMforms.BankForm
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
             this.HistoryTab = new MetroFramework.Controls.MetroTabPage();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.metroTabPage6 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
             this.BalanceLbl = new MetroFramework.Controls.MetroLabel();
             this.IdLbl = new MetroFramework.Controls.MetroLabel();
             this.MainTAb.SuspendLayout();
@@ -65,15 +60,12 @@ namespace ATMforms.BankForm
             // MainTAb
             // 
             this.MainTAb.Controls.Add(this.OverViewTab);
-            this.MainTAb.Controls.Add(this.metroTabPage5);
             this.MainTAb.Controls.Add(this.TransactionTab);
             this.MainTAb.Controls.Add(this.HistoryTab);
-            this.MainTAb.Controls.Add(this.metroTabPage6);
-            this.MainTAb.Controls.Add(this.metroTabPage4);
             this.MainTAb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTAb.Location = new System.Drawing.Point(20, 60);
             this.MainTAb.Name = "MainTAb";
-            this.MainTAb.SelectedIndex = 2;
+            this.MainTAb.SelectedIndex = 0;
             this.MainTAb.Size = new System.Drawing.Size(1301, 718);
             this.MainTAb.TabIndex = 0;
             this.MainTAb.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -95,7 +87,6 @@ namespace ATMforms.BankForm
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.metroButton4);
             this.metroPanel1.Controls.Add(this.BalanceBtn);
             this.metroPanel1.Controls.Add(this.metroPanel2);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
@@ -110,15 +101,6 @@ namespace ATMforms.BankForm
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // metroButton4
-            // 
-            this.metroButton4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroButton4.Location = new System.Drawing.Point(158, 41);
-            this.metroButton4.Name = "metroButton4";
-            this.metroButton4.Size = new System.Drawing.Size(286, 41);
-            this.metroButton4.TabIndex = 4;
-            this.metroButton4.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
             // BalanceBtn
             // 
             this.BalanceBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -130,7 +112,6 @@ namespace ATMforms.BankForm
             // 
             // metroPanel2
             // 
-            this.metroPanel2.Controls.Add(this.metroButton2);
             this.metroPanel2.Controls.Add(this.metroButton1);
             this.metroPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.metroPanel2.HorizontalScrollbarBarColor = true;
@@ -145,16 +126,6 @@ namespace ATMforms.BankForm
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
-            // metroButton2
-            // 
-            this.metroButton2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroButton2.Location = new System.Drawing.Point(0, 41);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(158, 41);
-            this.metroButton2.TabIndex = 3;
-            this.metroButton2.Text = "Saving Account";
-            this.metroButton2.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
             // metroButton1
             // 
             this.metroButton1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -164,19 +135,6 @@ namespace ATMforms.BankForm
             this.metroButton1.TabIndex = 2;
             this.metroButton1.Text = "Balance";
             this.metroButton1.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
-            // metroTabPage5
-            // 
-            this.metroTabPage5.HorizontalScrollbarBarColor = true;
-            this.metroTabPage5.HorizontalScrollbarSize = 0;
-            this.metroTabPage5.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage5.Name = "metroTabPage5";
-            this.metroTabPage5.Size = new System.Drawing.Size(1293, 679);
-            this.metroTabPage5.TabIndex = 4;
-            this.metroTabPage5.Text = "metroTabPage5";
-            this.metroTabPage5.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroTabPage5.VerticalScrollbarBarColor = true;
-            this.metroTabPage5.VerticalScrollbarSize = 0;
             // 
             // TransactionTab
             // 
@@ -322,32 +280,6 @@ namespace ATMforms.BankForm
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // metroTabPage6
-            // 
-            this.metroTabPage6.HorizontalScrollbarBarColor = true;
-            this.metroTabPage6.HorizontalScrollbarSize = 0;
-            this.metroTabPage6.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage6.Name = "metroTabPage6";
-            this.metroTabPage6.Size = new System.Drawing.Size(1293, 679);
-            this.metroTabPage6.TabIndex = 5;
-            this.metroTabPage6.Text = "metroTabPage6";
-            this.metroTabPage6.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroTabPage6.VerticalScrollbarBarColor = true;
-            this.metroTabPage6.VerticalScrollbarSize = 0;
-            // 
-            // metroTabPage4
-            // 
-            this.metroTabPage4.HorizontalScrollbarBarColor = true;
-            this.metroTabPage4.HorizontalScrollbarSize = 0;
-            this.metroTabPage4.Location = new System.Drawing.Point(4, 35);
-            this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(1293, 679);
-            this.metroTabPage4.TabIndex = 3;
-            this.metroTabPage4.Text = "metroTabPage4";
-            this.metroTabPage4.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.metroTabPage4.VerticalScrollbarBarColor = true;
-            this.metroTabPage4.VerticalScrollbarSize = 0;
-            // 
             // BalanceLbl
             // 
             this.BalanceLbl.AutoSize = true;
@@ -398,16 +330,11 @@ namespace ATMforms.BankForm
         private MetroFramework.Controls.MetroTabPage OverViewTab;
         private MetroFramework.Controls.MetroTabPage HistoryTab;
         private MetroFramework.Controls.MetroTabPage TransactionTab;
-        private MetroFramework.Controls.MetroTabPage metroTabPage4;
-        private MetroFramework.Controls.MetroTabPage metroTabPage5;
-        private MetroFramework.Controls.MetroTabPage metroTabPage6;
         private MetroFramework.Controls.MetroLabel BalanceLbl;
         private MetroFramework.Controls.MetroLabel IdLbl;
         private MetroFramework.Controls.MetroPanel metroPanel1;
-        private MetroFramework.Controls.MetroButton metroButton4;
         private MetroFramework.Controls.MetroButton BalanceBtn;
         private MetroFramework.Controls.MetroPanel metroPanel2;
-        private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroPanel metroPanel3;
         private MetroFramework.Controls.MetroButton SendBtn;
